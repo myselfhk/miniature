@@ -67,7 +67,7 @@ export default async function AdminApplicationsPage() {
                     {app.expertise_tags.slice(0, 3).map((tag: string) => (
                       <Badge
                         key={tag}
-                        variant="secondary"
+                        variant="default"
                         className="text-[10px]"
                       >
                         {tag}
