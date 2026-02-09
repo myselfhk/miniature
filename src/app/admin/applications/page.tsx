@@ -64,7 +64,7 @@ export default async function AdminApplicationsPage() {
                 </TableCell>
                 <TableCell>
                   <div className="flex flex-wrap gap-1">
-                    {app.expertise_tags.slice(0, 3).map((tag) => (
+                    {app.expertise_tags.slice(0, 3).map((tag: string) => (
                       <Badge
                         key={tag}
                         variant="secondary"
