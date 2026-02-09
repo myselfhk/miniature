@@ -1,36 +1,76 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Miniature (2026)
 
-## Getting Started
+Awwwards-level premium creative house website.
 
-First, run the development server:
+## Tech Stack
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- Next.js 15+ (App Router, Server Actions)
+- TailwindCSS
+- Framer Motion (Shared Layout, Light Field)
+- Supabase (Postgres, Auth, Storage)
+- shadcn/ui (Admin)
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Setup
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+1. **Install dependencies:**
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+   ```bash
+   npm install
+   ```
 
-## Learn More
+2. **Supabase Setup:**
+   - Create a new Supabase project.
+   - Run the contents of `supabase/schema.sql` in the Supabase SQL Editor.
+   - Create a public storage bucket named `uploads`.
+   - Create a public storage bucket named `og` (optional).
 
-To learn more about Next.js, take a look at the following resources:
+3. **Environment Variables:**
+   Copy `.env.example` to `.env.local` and fill in:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+   ```env
+   NEXT_PUBLIC_SUPABASE_URL=your_url
+   NEXT_PUBLIC_SUPABASE_ANON_KEY=your_anon_key
+   SUPABASE_SERVICE_ROLE_KEY=your_service_role_key
+   REVALIDATE_SECRET=random_secret_string
+   ADMIN_EMAIL_ALLOWLIST=your_email@example.com
+   NEXT_PUBLIC_SITE_URL=http://localhost:3000
+   ```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+4. **Run Locally:**
+   ```bash
+   npm run dev
+   ```
 
-## Deploy on Vercel
+## Admin & CMS
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Access the admin panel at `/admin`.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### Features
+
+- **Pages:** Manage landing pages (Home, About, People) with a block-based editor.
+- **Posts:** Editorial blog content.
+- **Case Studies:** Detailed project deep-dives with metrics and galleries.
+- **Inbox:** View consultant applications from the "People" page.
+
+### Block Editor
+
+The admin uses a "no-code" style block editor supporting:
+
+- Rich text (Headings, Paragraphs, Quotes)
+- Media (Images with captions)
+- Layout (Dividers, Callouts)
+- Components (CTAs, Metrics Grids, Work Cards, Pricing Cards, FAQ Lists)
+- Drag-and-drop reordering
+
+## "People of Miniature"
+
+The site includes a `/people` page for recruiting a consultant network.
+
+- Public page: `/people`
+- Application form: `/people/join`
+- Admin inbox: `/admin/applications`
+
+## Deployment
+
+- Set `NEXT_PUBLIC_SITE_URL` to your production domain.
+- Ensure `REVALIDATE_SECRET` matches in Vercel/Netlify env vars.

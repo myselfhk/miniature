@@ -1,0 +1,255 @@
+@import "tailwindcss";
+
+:root {
+  color-scheme: dark;
+
+  /* Brand Tokens */
+  --ink: #021414;
+  --paper: #f8f6f3;
+
+  /* Accents (80/15/5 rule: 80% neutral, 15% subtle glow, 5% electric) */
+  --accent-magenta: #fb00f6;
+  --accent-cyan: #00fff7;
+  --accent-yellow: #ffc702;
+
+  /* Derived */
+  --bg: var(--ink);
+  --text: var(--paper);
+  --muted: rgba(248, 246, 243, 0.7);
+  --dim: rgba(248, 246, 243, 0.45);
+  --subtle: rgba(248, 246, 243, 0.25);
+  --border: rgba(248, 246, 243, 0.08);
+  --border-hover: rgba(248, 246, 243, 0.15);
+
+  /* Fonts - mapped to Next.js font variables */
+  --font-serif-italic: var(--font-flecha);
+
+  /* Global UI System Tokens */
+  --radius: 1rem;
+  --radius-sm: 0.5rem;
+  --radius-lg: 1.5rem;
+  --radius-full: 9999px;
+
+  /* Spacing Scale (8px baseline) */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+  --space-20: 5rem;
+  --space-24: 6rem;
+  --space-32: 8rem;
+
+  /* Shadow */
+  --shadow-soft: 0 4px 30px -10px rgba(0, 0, 0, 0.3);
+  --shadow-glow-cyan: 0 0 60px -15px rgba(0, 255, 247, 0.3);
+  --shadow-glow-magenta: 0 0 60px -15px rgba(251, 0, 246, 0.3);
+
+  /* Reference Easings (Exact Digits) */
+  --ease: cubic-bezier(0.84, 0, 0.16, 1);
+  --expoInOut: cubic-bezier(0.87, 0, 0.13, 1);
+  --smooth: cubic-bezier(0.76, 0, 0.24, 1);
+  --ease-out-expo: cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+@theme {
+  --color-ink: var(--ink);
+  --color-paper: var(--paper);
+  --color-bg: var(--bg);
+  --color-text: var(--text);
+  --color-muted: var(--muted);
+  --color-dim: var(--dim);
+  --color-subtle: var(--subtle);
+  --color-border: var(--border);
+  --color-border-hover: var(--border-hover);
+
+  --color-accent-magenta: var(--accent-magenta);
+  --color-accent-cyan: var(--accent-cyan);
+  --color-accent-yellow: var(--accent-yellow);
+
+  --font-serif-italic: var(--font-serif-italic);
+
+  --animate-fade-in: fade-in 0.6s ease-out forwards;
+  --animate-slide-up: slide-up 0.8s ease-out forwards;
+  --animate-blur-in: blur-in 1s var(--ease-out-expo) forwards;
+
+  /* Custom Easings */
+  --ease-custom: var(--ease);
+  --ease-expo: var(--expoInOut);
+  --ease-smooth: var(--smooth);
+  --ease-out-expo: var(--ease-out-expo);
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slide-up {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes blur-in {
+  from {
+    opacity: 0;
+    filter: blur(12px);
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    filter: blur(0);
+    transform: translateY(0);
+  }
+}
+
+@keyframes runway-fill {
+  from {
+    transform: scaleY(0);
+  }
+  to {
+    transform: scaleY(1);
+  }
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* Reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+body {
+  min-height: 100%;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-host-grotesk), system-ui, sans-serif;
+  overflow-x: hidden;
+}
+
+/* Cinematic Grain Overlay */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 50;
+  opacity: 0.07;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+}
+
+/* Typography Utilities */
+.text-editorial {
+  font-family: var(--font-serif-italic);
+  font-style: italic;
+  font-weight: 400;
+}
+
+.text-micro {
+  font-size: 0.6875rem; /* 11px */
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  font-weight: 500;
+}
+
+.text-caption {
+  font-size: 0.8125rem; /* 13px */
+  letter-spacing: 0.02em;
+  line-height: 1.6;
+}
+
+/* Chapter System - Premium Scrollytelling */
+.chapter {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: var(--space-20) 0;
+}
+
+.chapter-label {
+  font-size: 0.6875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: var(--dim);
+  margin-bottom: var(--space-6);
+}
+
+/* Premium line-length constraint for body text */
+.prose-body {
+  max-width: 42rem; /* ~670px, optimized for 52-70 chars */
+  line-height: 1.7;
+}
+
+/* Interactive focus states */
+.focus-ring {
+  outline: none;
+}
+
+.focus-ring:focus-visible {
+  outline: 2px solid var(--accent-cyan);
+  outline-offset: 3px;
+  border-radius: var(--radius-sm);
+}
+
+/* Utility for soft masks */
+.mask-gradient-b {
+  mask-image: linear-gradient(to bottom, black 80%, transparent 100%);
+}
+
+.mask-gradient-t {
+  mask-image: linear-gradient(to top, black 80%, transparent 100%);
+}
+
+/* Smooth Scroll Container (Lenis) */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+.lenis.lenis-scrolling iframe {
+  pointer-events: none;
+}
