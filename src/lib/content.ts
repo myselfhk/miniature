@@ -44,15 +44,13 @@ export async function getPostBySlug(
 ): Promise<BlogPost | null> {
   if (!isSupabaseConfigured()) return null;
   const supabase = await getSupabaseServerClient();
-  const query = supabase
-    .from("posts")
-    .select(baseSelect)
-    .eq("slug", slug)
-    .single();
+  let query = supabase.from("posts").select(baseSelect).eq("slug", slug);
 
-  const { data } = includeDrafts
-    ? await query
-    : await query.eq("status", "published");
+  if (!includeDrafts) {
+    query = query.eq("status", "published");
+  }
+
+  const { data } = await query.single();
 
   return (data ?? null) as BlogPost | null;
 }

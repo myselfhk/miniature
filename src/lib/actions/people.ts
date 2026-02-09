@@ -14,8 +14,8 @@ const applicationSchema = z.object({
   availability: z.string().min(1, "Availability is required"),
   hourly_rate_range: z.string().optional(), // Not in new short form
   visibility_preference: z.enum(["anonymous", "first-name-only", "public"]),
-  compliance_confirmed: z.literal(true, {
-    errorMap: () => ({ message: "You must confirm compliance" }),
+  compliance_confirmed: z.boolean().refine((val) => val === true, {
+    message: "You must confirm compliance",
   }),
   notes: z.string().optional(),
 });

@@ -26,14 +26,16 @@ const baseSelect =
 export async function getWorkItems(includeDrafts = false): Promise<WorkItem[]> {
   if (!isSupabaseConfigured()) return [];
   const supabase = await getSupabaseServerClient();
-  const query = supabase
+  let query = supabase
     .from("case_studies")
     .select(baseSelect)
     .order("published_at", { ascending: false, nullsFirst: false });
 
-  const { data } = includeDrafts
-    ? await query
-    : await query.eq("status", "published");
+  if (!includeDrafts) {
+    query = query.eq("status", "published");
+  }
+
+  const { data } = await query;
 
   return (data ?? []).map((item) => ({
     id: item.id,
@@ -61,14 +63,13 @@ export async function getWorkItem(
 ): Promise<WorkItem | null> {
   if (!isSupabaseConfigured()) return null;
   const supabase = await getSupabaseServerClient();
-  const query = supabase
-    .from("case_studies")
-    .select(baseSelect)
-    .eq("slug", uid)
-    .single();
-  const { data } = includeDrafts
-    ? await query
-    : await query.eq("status", "published");
+  let query = supabase.from("case_studies").select(baseSelect).eq("slug", uid);
+
+  if (!includeDrafts) {
+    query = query.eq("status", "published");
+  }
+
+  const { data } = await query.single();
 
   if (!data) return null;
   return {
