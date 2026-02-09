@@ -24,7 +24,7 @@ export default function Navbar() {
   });
 
   // Reference easing: --smooth: cubic-bezier(.76, 0 ,.24 ,1)
-  const smoothEase = [0.76, 0, 0.24, 1];
+  const smoothEase: [number, number, number, number] = [0.76, 0, 0.24, 1];
 
   return (
     <motion.header

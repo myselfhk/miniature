@@ -55,7 +55,7 @@ export default function HowItWorks() {
   // Timeline fill progress
   const timelineScale = useTransform(scrollYProgress, [0.1, 0.8], [0, 1]);
 
-  const referenceEase = [0.84, 0, 0.16, 1];
+  const referenceEase: [number, number, number, number] = [0.84, 0, 0.16, 1];
 
   return (
     <section

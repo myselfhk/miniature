@@ -27,7 +27,7 @@ export default function TheProblem() {
   );
   const focusOpacity = useTransform(scrollYProgress, [0.2, 0.5], [0.6, 1]);
 
-  const referenceEase = [0.84, 0, 0.16, 1];
+  const referenceEase: [number, number, number, number] = [0.84, 0, 0.16, 1];
 
   const containerVariants = {
     hidden: { opacity: 0 },

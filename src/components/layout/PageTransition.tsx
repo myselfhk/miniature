@@ -9,7 +9,7 @@ export default function PageTransition({ children }: { children: ReactNode }) {
 
   // Using the reference easing: cubic-bezier(.84, 0, .16, 1)
   // Framer Motion accepts cubic-bezier as an array of 4 numbers.
-  const referenceEase = [0.84, 0, 0.16, 1];
+  const referenceEase: [number, number, number, number] = [0.84, 0, 0.16, 1];
 
   return (
     <AnimatePresence mode="wait">

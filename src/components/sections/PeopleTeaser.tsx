@@ -14,7 +14,7 @@ const roles = [
 
 export default function PeopleTeaser() {
   const prefersReducedMotion = useReducedMotion();
-  const referenceEase = [0.84, 0, 0.16, 1];
+  const referenceEase: [number, number, number, number] = [0.84, 0, 0.16, 1];
 
   const containerVariants = {
     hidden: { opacity: 0 },

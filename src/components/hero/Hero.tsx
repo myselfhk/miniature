@@ -21,7 +21,7 @@ export default function Hero() {
   const scale = useTransform(scrollY, [0, 400], [1, 0.98]);
 
   // Reference easing: --ease: cubic-bezier(.84, 0, .16, 1)
-  const referenceEase = [0.84, 0, 0.16, 1];
+  const referenceEase: [number, number, number, number] = [0.84, 0, 0.16, 1];
 
   const containerVariants = {
     hidden: { opacity: 0 },
